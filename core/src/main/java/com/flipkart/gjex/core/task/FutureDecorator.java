@@ -189,10 +189,6 @@ public class FutureDecorator<T> implements Future<T> {
 		} catch (InterruptedException | ExecutionException e) {
 			String errorMessage =  e.getCause() == null ? e.getMessage() :  e.getCause().getMessage();
 			if (future.getCompletion().equals(ConcurrentTask.Completion.Mandatory)) {
-				if (e.getCause() != null && e.getCause() instanceof TimeoutException) {
-					throw new TaskException("Task execution results not available due to timeout.",
-							new StatusException(Status.DEADLINE_EXCEEDED.withDescription("Deadline exceeded waiting for results :" + errorMessage)));
-				}
 				throw new TaskException("Error executing mandatory Task : " + errorMessage, e);
 			} else {
 				LOGGER.warn("Execution exception in optional task :" + errorMessage + " . Not failing the execution and proceeding.");
