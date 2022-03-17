@@ -9,13 +9,9 @@ publishing {
 		}
 	}
 	repositories {
-	    maven {
-    	    		url "https://repo.clojars.org"
-        		credentials {
-            		username = rootProject.ext.clojarsusername
-				password = rootProject.ext.clojarspassword
-    	    		}
-    	    }
+		maven {
+			url "http://artifactory.fkinternal.com/artifactory/v1.0/artifacts/libs-${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'release'}-local"
+		}
 	}	
 }
 
